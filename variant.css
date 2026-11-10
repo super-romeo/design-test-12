@@ -21,14 +21,19 @@
 
 /* page CSS inside the visuals: the drawn render fills the hero's stage (the window on a desktop, the
    client's phone alone on a phone) and each card's drawing its panel; their words in the text face */
-.hero__stage [data-product] > svg { position: absolute; inset: 7% 0; width: 100%; height: 86%; }
-.hero__stage .stage-phone { display: none; }
-.panel > svg { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; }
-:is(.hero__stage, .panel) text { font-family: var(--font-text); }
-@media (max-width: 639px) {
-  .hero__stage .stage-desk { display: none; }
-  .hero__stage .stage-phone { display: block; }
+.hero__stage [data-product] > img { position: absolute; inset: 7% 0; margin: auto; height: 86%; width: auto; max-width: 100%;
+  aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--r-lg); }
+
+/* brief 6 (same content on every layout): the eyebrow takes a row of its own above the h1 in the head grid;
+   the four facts are a strip right under the hero (kit .hero__facts); a card link keeps its arrow as text (no inline SVG) */
+@media (min-width: 1024px) {
+  #main .hero__head { grid-template-rows: auto auto auto; }
+  #main .hero__head .hero__kicker { grid-column: 1 / span 7; grid-row: 1; margin: 0; }
+  #main .hero__head h1 { grid-row: 2 / span 2; }
+  #main .hero__head .hero__lead { grid-row: 2; }
+  #main .hero__head > .btn-row { grid-row: 3; }
 }
+.card__link::after { content: "\2192"; }
 
 /* no library script on the page (every link and button must carry a tracking name, so no menu button):
    below 1024 the nav words take a second row of the fixed bar instead of the script's sheet */
